@@ -1,0 +1,220 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #ff00ff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #ff00ff;
+            padding: 0px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            color: white;
+            font-size: 14px;
+            margin-left: 20px;
+        }
+
+        .search-bar {
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            width: 300px;
+            font-size: 14px;
+        }
+
+        .nav {
+            background: #ff00ff;
+            padding: 15px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav a.active {
+            background: #FFD700;
+            color: #000;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 0;
+            max-width: 100%;
+            margin: 0;
+            align-items: start;
+        }
+
+        .sidebar {
+            background: #ff00ff;
+            padding: 0;
+        }
+
+        .sidebar-content {
+            background: #ff00ff;
+            color: white;
+            text-align: center;
+            padding: 0;
+        }
+
+        .sidebar-text {
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sidebar-button {
+            background: #FFD700;
+            color: #000;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .main-content {
+            background: #ff00ff;
+            padding: 0;
+        }
+
+        .video-container {
+            background: #ff00ff;
+            position: relative;
+            width: 100%;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+            margin: 0 auto;
+            object-fit: fill;    /* Adaugă această linie */
+        }
+
+        .video-info {
+            background: #ff00ff;
+            padding: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .video-title {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .video-badge {
+            background: #FFD700;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .video-stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .stat {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .right-sidebar {
+            background: #ff00ff;
+            padding: 0;
+        }
+
+        .ad-space {
+            width: 100%;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .ad-title {
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .tiktok-logo {
+            width: 120px;
+            height: 40px;
+            background: #000;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+    .promo-image {
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+        display: block;
+    }
