@@ -1,0 +1,45 @@
+name: Rebuild Website
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Generate Cache-Busting Version
+        run: |
+          HASH=$(date +%s | sha256sum | head -c 8)
+          echo "HASH=$HASH" >> $GITHUB_ENV
+
+      - name: Update Asset References
+        run: |
+          for file in *.html; do
+            sed -i -E "s|(/assets/backend/styles.css)(\?v=[^\"']*)?|\\1?v=${HASH}|g" "$file"
+            sed -i -E "s|(/assets/backend/404.css)(\?v=[^\"']*)?|\\1?v=${HASH}|g" "$file"
+          done
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.WEBSITE_AUTH }}@github.com/padrewin/scoalasex.github.io.git
+          git add .
+          git commit -m "Rebuild: Auto-update cache-busting version" || echo "No changes to commit"
+          git push origin master
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.WEBSITE_AUTH }}
+          publish_branch: gh-pages
+          publish_dir: .
+          exclude_assets: .github
+          enable_jekyll: false

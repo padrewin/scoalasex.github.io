@@ -1,0 +1,33 @@
+name: Repository Scan
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch: # Trigger manual
+
+jobs:
+  scan:
+    name: Scan Repository
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Trivy (sau un alt tool)
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b ./bin
+          sudo mv ./bin/trivy /usr/local/bin/
+
+      # Scan repository
+      - name: Scan Repository with Trivy
+        run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+
+      # Add a placeholder step for further actions (if scan passes)
+      - name: Continue to Further Actions
+        if: success()
+        run: echo "Scan passed! Proceeding with next steps."

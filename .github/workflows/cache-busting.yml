@@ -1,0 +1,43 @@
+name: Cache Busting for Backend Assets
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write # Permite modificarea fișierelor în repository
+
+jobs:
+  cache-busting:
+    name: Cache Busting
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Generate unique hash for versioning
+      - name: Generate Version Hash
+        run: |
+          HASH=$(date +%s | sha256sum | head -c 8) # Hash unic bazat pe timestamp
+          echo "HASH=$HASH" >> $GITHUB_ENV
+
+      # Update references in HTML files
+      - name: Update Asset References in HTML
+        run: |
+          for file in *.html; do
+            sed -i -E "s|(/assets/backend/styles.css)(\?v=[^\"']*)?|\\1?v=${HASH}|g" "$file"
+            sed -i -E "s|(/assets/backend/404.css)(\?v=[^\"']*)?|\\1?v=${HASH}|g" "$file"
+          done
+
+      # Commit and push updated files
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Update cache-busting version for backend assets"
+          git push
